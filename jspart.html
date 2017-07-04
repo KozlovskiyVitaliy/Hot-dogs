@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body>
+	<script>
+		var data = ['cabd', 'dabc', 'dacb', 'dbac', 'test', 'bdca', 'dcab', 'dcba', 'abcd' ];
+
+		function findUniq (arr) {
+
+			var differentId;
+
+			for (var i = 1; i < data.length; i++) {
+
+				var currString = getSortedString(data[i]);
+				var prevString = getSortedString(data[i - 1]);
+
+				if (differentId) {
+					differentStr = getSortedString(data[differentId]);
+					if (differentStr == currString) {
+						differentId = i - 1;
+					} else if (differentStr == prevString) {
+						differentId = i;
+					}
+
+					break;
+				}
+
+				if (currString != prevString) {
+					differentId = i - 1;
+				}
+			}
+
+			return arr[differentId];
+		}
+
+		function getSortedString(str) {
+			return str.split('').sort().join('');
+		}
+
+		console.log(findUniq(data));
+	</script>
+</body>
+</html>
